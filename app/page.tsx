@@ -183,18 +183,35 @@ export default function RecruitmentPage() {
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-5xl md:text-7xl font-black mb-12 text-black font-bold">ABOUT CODENEX</h2>
-            <p className="text-xl md:text-2xl leading-relaxed text-black/90 mb-8 font-bold">
-              Welcome to CodeNex Club, where innovation meets adventure! Just like the Straw Hat Pirates, we're a crew
-              of passionate developers, designers, and tech enthusiasts sailing through the digital seas of SRMIST.
-            </p>
-            <p className="text-xl md:text-2xl leading-relaxed text-black/90 font-bold">
-              Our mission is to explore new technologies, create amazing projects, and build a community where every
-              member can achieve their dreams in the world of technology. Join our crew and embark on an epic journey!
-            </p>
+            
+            <div className="bg-black/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 mb-8 border border-black/20">
+              <div className="space-y-6">
+                <p className="text-xl md:text-2xl leading-relaxed text-black font-bold">
+                  Welcome to <span className="text-black underline decoration-4 underline-offset-4">CodeNex Club</span>, where innovation meets adventure!
+                </p>
+                
+                <p className="text-lg md:text-xl leading-relaxed text-black/90 font-medium">
+                  Just like the Straw Hat Pirates, we're a crew of passionate developers, designers, and tech enthusiasts 
+                  sailing through the digital seas of SRMIST.
+                </p>
+                
+                <div className="w-24 h-1 bg-black mx-auto rounded-full"></div>
+                
+                <p className="text-lg md:text-xl leading-relaxed text-black/90 font-medium">
+                  Our mission is to explore new technologies, create amazing projects, and build a community where every 
+                  member can achieve their dreams in the world of technology.
+                </p>
+                
+                <p className="text-xl md:text-2xl leading-relaxed text-black font-bold">
+                  Join our crew and embark on an <span className="text-black underline decoration-4 underline-offset-4">epic journey!</span>
+                </p>
+              </div>
+            </div>
+            
             <img
               src="/standing-Luffy.png"
               alt="Standing Luffy"
-              className="mx-auto mt-10 w-64 md:w-80 lg:w-96 object-contain"
+              className="mx-auto w-64 md:w-80 lg:w-96 object-contain drop-shadow-2xl"
             />
           </div>
         </div>
