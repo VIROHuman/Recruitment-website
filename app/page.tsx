@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export default function RecruitmentPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -13,6 +14,34 @@ export default function RecruitmentPage() {
     seconds: 0,
   })
 
+  // Scroll tracking for Luffy animation
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Calculate Luffy's position based on scroll
+  const getLuffyPosition = () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    const scrollProgress = scrollY / maxScroll
+    
+    // Create a circular path around the viewport
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
+    const radiusX = Math.min(window.innerWidth * 0.4, 300)
+    const radiusY = Math.min(window.innerHeight * 0.3, 200)
+    
+    // Complete multiple circles as user scrolls
+    const angle = scrollProgress * Math.PI * 6 // 3 full rotations
+    
+    const x = centerX + Math.cos(angle) * radiusX
+    const y = centerY + Math.sin(angle) * radiusY
+    
+    return { x, y, angle }
+  }
+
+  const luffyPos = getLuffyPosition()
   // Countdown timer
   useEffect(() => {
     const targetDate = new Date("2025-08-29T23:59:59").getTime()
@@ -44,6 +73,22 @@ export default function RecruitmentPage() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Floating Luffy */}
+      <div
+        className="fixed z-30 pointer-events-none transition-all duration-300 ease-out"
+        style={{
+          left: `${luffyPos.x}px`,
+          top: `${luffyPos.y}px`,
+          transform: `translate(-50%, -50%) rotate(${luffyPos.angle * 20}deg)`,
+        }}
+      >
+        <img
+          src="/standing-Luffy.png"
+          alt="Floating Luffy"
+          className="w-24 md:w-32 lg:w-40 object-contain drop-shadow-2xl opacity-80 hover:opacity-100 transition-opacity duration-300"
+        />
+      </div>
+
       {/* Navigation */}
       <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-black/80 backdrop-blur-md rounded-full px-8 py-4 border border-gray-700/50 w-[90%] max-w-6xl">
         <div className="flex items-center justify-between">
@@ -207,12 +252,6 @@ export default function RecruitmentPage() {
                 </p>
               </div>
             </div>
-            
-            <img
-              src="/standing-Luffy.png"
-              alt="Standing Luffy"
-              className="mx-auto w-64 md:w-80 lg:w-96 object-contain drop-shadow-2xl"
-            />
           </div>
         </div>
       </section>
